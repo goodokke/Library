@@ -18,6 +18,7 @@ namespace Library
         Genre genre;
         int index;
         private Books formBooks;
+        private List<Genre> _genres;
         public Genres(Books formBooks = null)
         {
             this.formBooks = formBooks;
@@ -26,6 +27,7 @@ namespace Library
                 formBooks.SelectedCellGenre = -1;
             }
             InitializeComponent();
+            CenterToScreen();
             getRecords();
         }
 
@@ -33,10 +35,10 @@ namespace Library
         {
             using (DBContext DBContext = new DBContext())
             {
-                List<Genre> genres = DBContext.Genres.ToList();
+                _genres = DBContext.Genres.ToList();
 
                 dataGridView1.DataSource = null;
-                dataGridView1.DataSource = genres;
+                dataGridView1.DataSource = _genres;
                 dataGridView1.Columns["Id"].Visible = false;
                 dataGridView1.Columns["Name"].HeaderText = "Наименование";
             }
@@ -157,6 +159,33 @@ namespace Library
                     index = dataGridView1.SelectedRows[0].Index;
                 }
             }
+        }
+
+        /// <summary>
+        /// Поиск
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button11_Click(object sender, EventArgs e)
+        {
+            var genres = _genres.FindAll(r => r.Name.ToString().ToLower().Contains(searchTextBox.Text.ToLower())
+                                                );
+
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = genres;
+            dataGridView1.Columns["Id"].Visible = false;
+            dataGridView1.Columns["Name"].HeaderText = "Наименование";
+        }
+
+        /// <summary>
+        /// Очистить
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button10_Click(object sender, EventArgs e)
+        {
+            searchTextBox.Text = "";
+            getRecords();
         }
     }
 }

@@ -26,6 +26,7 @@ namespace Library
         public Journals()
         {
             InitializeComponent();
+            CenterToScreen();
             getRecords();
             getBooks();
             getReaders();
@@ -327,10 +328,10 @@ namespace Library
         private void button10_Click(object sender, EventArgs e)
         {
             var _journals = journals.FindAll(r => r.DateGive.ToString().ToLower().Contains(searchTextBox.Text.ToLower()) ||
-                                                    r.Book.ToString().ToLower().Contains(searchTextBox.Text.ToLower()) ||
+                                                    r.Book.Name.ToString().ToLower().Contains(searchTextBox.Text.ToLower()) ||
                                                     r.DateReturn.ToString().ToLower().Contains(searchTextBox.Text.ToLower()) ||
-                                                    r.Employee.ToString().ToLower().Contains(searchTextBox.Text.ToLower())||
-                                                    r.Reader.ToString().ToLower().Contains(searchTextBox.Text.ToLower()));
+                                                    r.Employee.FirstName.ToString().ToLower().Contains(searchTextBox.Text.ToLower())||
+                                                    r.Reader.LibraryCard.ToString().ToLower().Contains(searchTextBox.Text.ToLower()));
             dataGridView1.DataSource = null;
             var _data = _journals
                 .Select(b => new

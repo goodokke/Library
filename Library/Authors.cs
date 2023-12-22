@@ -17,6 +17,8 @@ namespace Library
         Author author;
         int index;
         private Books formBooks;
+
+        private List<Author> _authors;
         public Authors(Books formBooks = null)
         {
             this.formBooks = formBooks;
@@ -25,6 +27,7 @@ namespace Library
             //    formBooks.SelectedCellAuthor = -1;
             //}
             InitializeComponent();
+            CenterToScreen();
             getRecords();
         }
 
@@ -32,10 +35,10 @@ namespace Library
         {
             using (DBContext DBContext = new DBContext())
             {
-                List<Author> authors = DBContext.Authors.ToList();
+                _authors = DBContext.Authors.ToList();
 
                 dataGridView1.DataSource = null;
-                dataGridView1.DataSource = authors;
+                dataGridView1.DataSource = _authors;
                 dataGridView1.Columns["Id"].Visible = false;
                 dataGridView1.Columns["SecondName"].HeaderText = "Фамилия";
                 dataGridView1.Columns["FirstName"].HeaderText = "Имя";
@@ -177,6 +180,36 @@ namespace Library
                     index = dataGridView1.SelectedRows[0].Index;
                 }
             }
+        }
+
+        /// <summary>
+        /// Найти
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button11_Click(object sender, EventArgs e)
+        {
+            var authors = _authors.FindAll(r => r.FirstName.ToString().ToLower().Contains(searchTextBox.Text.ToLower()) ||
+                                                    r.SecondName.ToLower().ToString().ToLower().Contains(searchTextBox.Text.ToLower()) ||
+                                                    r.ThirdName.ToLower().ToString().ToLower().Contains(searchTextBox.Text.ToLower())
+                                                    );
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = authors;
+            dataGridView1.Columns["Id"].Visible = false;
+            dataGridView1.Columns["SecondName"].HeaderText = "Фамилия";
+            dataGridView1.Columns["FirstName"].HeaderText = "Имя";
+            dataGridView1.Columns["ThirdName"].HeaderText = "Отчество";
+        }
+
+        /// <summary>
+        /// Очистить
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button10_Click(object sender, EventArgs e)
+        {
+            searchTextBox.Text = "";
+            getRecords();
         }
     }
 }

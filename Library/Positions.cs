@@ -17,6 +17,7 @@ namespace Library
         Position position;
         int index;
         private Employees formEmployees;
+        private List<Position> _positions;
         public Positions(Employees formEmployees = null)
         {
             this.formEmployees = formEmployees;
@@ -25,6 +26,7 @@ namespace Library
                 formEmployees.SelectedCellPosition = -1;
             }
             InitializeComponent();
+            CenterToScreen();
             getRecords();
         }
 
@@ -41,10 +43,10 @@ namespace Library
         {
             using (DBContext DBContext = new DBContext())
             {
-                List<Position> positions = DBContext.Positions.ToList();
+                _positions = DBContext.Positions.ToList();
 
                 dataGridView1.DataSource = null;
-                dataGridView1.DataSource = positions;
+                dataGridView1.DataSource = _positions;
                 dataGridView1.Columns["Id"].Visible = false;
                 dataGridView1.Columns["Name"].HeaderText = "Наименование";
             }
@@ -156,6 +158,32 @@ namespace Library
                     index = dataGridView1.SelectedRows[0].Index;
                 }
             }
+        }
+
+        /// <summary>
+        /// Найти
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button11_Click(object sender, EventArgs e)
+        {
+            var positions = _positions.FindAll(r => r.Name.ToString().ToLower().Contains(searchTextBox.Text.ToLower()));
+
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = positions;
+            dataGridView1.Columns["Id"].Visible = false;
+            dataGridView1.Columns["Name"].HeaderText = "Наименование";
+        }
+
+        /// <summary>
+        /// Очистить
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button10_Click(object sender, EventArgs e)
+        {
+            searchTextBox.Text = "";
+            getRecords();
         }
     }
 }

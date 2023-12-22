@@ -19,6 +19,8 @@ namespace Library
         int index;
         private Journals formJournals;
         public int SelectedCellPosition = -1;
+
+        private List<Employee> _employees;
         public Employees(Journals formJournals = null)
         {
             this.formJournals = formJournals;
@@ -27,6 +29,7 @@ namespace Library
                 formJournals.SelectedCellReader = -1;
             }
             InitializeComponent();
+            CenterToScreen();
             getRecords();
             getPositions();
         }
@@ -35,11 +38,11 @@ namespace Library
         {
             using (DBContext DBContext = new DBContext())
             {
-                List<Employee> employees = DBContext.Employees.Include(e => e.Position).ToList();
+                _employees = DBContext.Employees.Include(e => e.Position).ToList();
 
                 dataGridView1.DataSource = null;
 
-                var data = employees
+                var data = _employees
                     .Select(b => new
                     {
                         Id = b.Id,
@@ -215,6 +218,50 @@ namespace Library
                     index = dataGridView1.SelectedRows[0].Index;
                 }
             }
+        }
+
+        /// <summary>
+        /// Поиск
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button11_Click(object sender, EventArgs e)
+        {
+            var employees = _employees.FindAll(r => r.Position.Name.ToString().ToLower().Contains(searchTextBox.Text.ToLower()) ||
+                                                    r.FirstName.ToString().ToLower().Contains(searchTextBox.Text.ToLower()) ||
+                                                    r.SecondName.ToString().ToLower().Contains(searchTextBox.Text.ToLower()) ||
+                                                    r.ThirdName.ToString().ToLower().Contains(searchTextBox.Text.ToLower())
+                                                );
+
+            dataGridView1.DataSource = null;
+
+            var data = employees
+                .Select(b => new
+                {
+                    Id = b.Id,
+                    SecondName = b.SecondName,
+                    FirstName = b.FirstName,
+                    ThirdName = b.ThirdName,
+                    Position = b.Position.Name,
+                }).ToList();
+
+            dataGridView1.DataSource = data;
+            dataGridView1.Columns["Id"].Visible = false;
+            dataGridView1.Columns["SecondName"].HeaderText = "Фамилия";
+            dataGridView1.Columns["FirstName"].HeaderText = "Имя";
+            dataGridView1.Columns["ThirdName"].HeaderText = "Отчество";
+            dataGridView1.Columns["Position"].HeaderText = "Должность";
+        }
+
+        /// <summary>
+        /// Очистить
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button10_Click(object sender, EventArgs e)
+        {
+            searchTextBox.Text = "";
+            getRecords();
         }
     }
 }

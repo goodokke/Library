@@ -27,6 +27,7 @@ namespace Library
                 formJournals.SelectedCellReader = -1;
             }
             InitializeComponent();
+            CenterToScreen();
             getRecords();
         }
 
@@ -49,7 +50,6 @@ namespace Library
         private void button1_Click(object sender, EventArgs e)
         {
             dataGridView1.Visible = false;
-            textBox1.Text = "";
             textBox2.Text = "";
             textBox3.Text = "";
             textBox4.Text = "";
@@ -110,16 +110,32 @@ namespace Library
             searchTextBox.Enabled = true;
         }
 
+        private int GenerateNumber()
+        {
+            Random random = new Random();
+            int fiveDigitNumber = random.Next(10000, 100000);
+            return fiveDigitNumber;
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
             using (DBContext DBContext = new DBContext())
             {
-                int number = 0;
-                if (Int32.TryParse(textBox1.Text, out number)
-                    && textBox4.Text.Length > 0 
+                if (textBox4.Text.Length > 0 
                     && textBox2.Text.Length > 0
                     && textBox3.Text.Length > 0)
                 {
+                    int number;
+                    while (true)
+                    {
+                        number = GenerateNumber();
+                        var test = DBContext.Readers.Where(x => x.LibraryCard == number);
+                        if (!test.Any())
+                        {
+                            break;
+                        }
+                    }
+                    
                     if (isNewRecord)
                     {
                         Reader reader = new Reader
@@ -175,7 +191,6 @@ namespace Library
                     reader = DBContext.Readers.Where(r => r.Id == Convert.ToInt32(dataGridView1[0, dataGridView1.SelectedRows[0].Index].Value)).FirstOrDefault();
 
                     dataGridView1.Visible = false;
-                    textBox1.Text = reader.LibraryCard.ToString();
                     textBox2.Text = reader.SecondName.ToString();
                     textBox3.Text = reader.FirstName.ToString();
                     textBox4.Text = reader.ThirdName.ToString();

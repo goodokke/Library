@@ -15,6 +15,7 @@ namespace Library
         public Main()
         {
             InitializeComponent();
+            CenterToScreen();
         }
 
         private void издательствоToolStripMenuItem_Click(object sender, EventArgs e)
@@ -63,6 +64,29 @@ namespace Library
         {
             Journals journals = new Journals();
             journals.Show();
+        }
+
+        /// <summary>
+        /// Кол-во выданных книг
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void количествоВыданныхКнигToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Report1 report = new Report1();
+            report.Show();
+        }
+
+        private void популярныеЖанрыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Report2 report = new Report2();
+            report.Show();
+        }
+
+        private void просроченСрокВозвратаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Report3 report = new Report3();
+            report.Show();
         }
     }
 }

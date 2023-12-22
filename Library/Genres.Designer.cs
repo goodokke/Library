@@ -39,6 +39,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.searchTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -50,9 +53,11 @@
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(12, 59);
+            this.groupBox1.Location = new System.Drawing.Point(6, 52);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(816, 235);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.groupBox1.Size = new System.Drawing.Size(439, 110);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Добавление";
@@ -61,9 +66,10 @@
             // button6
             // 
             this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.Location = new System.Drawing.Point(647, 171);
+            this.button6.Location = new System.Drawing.Point(348, 80);
+            this.button6.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(150, 46);
+            this.button6.Size = new System.Drawing.Size(81, 22);
             this.button6.TabIndex = 6;
             this.button6.Text = "Отмена";
             this.button6.UseVisualStyleBackColor = true;
@@ -71,9 +77,10 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(491, 171);
+            this.button3.Location = new System.Drawing.Point(264, 80);
+            this.button3.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(150, 46);
+            this.button3.Size = new System.Drawing.Size(81, 22);
             this.button3.TabIndex = 4;
             this.button3.Text = "ОК";
             this.button3.UseVisualStyleBackColor = true;
@@ -81,34 +88,38 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(9, 87);
+            this.textBox1.Location = new System.Drawing.Point(5, 41);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(513, 39);
+            this.textBox1.Size = new System.Drawing.Size(278, 23);
             this.textBox1.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 52);
+            this.label2.Location = new System.Drawing.Point(5, 24);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(186, 32);
+            this.label2.Size = new System.Drawing.Size(93, 15);
             this.label2.TabIndex = 0;
             this.label2.Text = "Наименование:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(6, 4);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 32);
+            this.label1.Size = new System.Drawing.Size(47, 15);
             this.label1.TabIndex = 18;
             this.label1.Text = "Жанры";
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(929, 215);
+            this.button4.Location = new System.Drawing.Point(501, 125);
+            this.button4.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(220, 46);
+            this.button4.Size = new System.Drawing.Size(118, 22);
             this.button4.TabIndex = 17;
             this.button4.Text = "Удалить";
             this.button4.UseVisualStyleBackColor = true;
@@ -116,9 +127,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(929, 111);
+            this.button2.Location = new System.Drawing.Point(501, 76);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(220, 46);
+            this.button2.Size = new System.Drawing.Size(118, 22);
             this.button2.TabIndex = 16;
             this.button2.Text = "Редактировать";
             this.button2.UseVisualStyleBackColor = true;
@@ -126,9 +138,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(929, 59);
+            this.button1.Location = new System.Drawing.Point(501, 52);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(220, 46);
+            this.button1.Size = new System.Drawing.Size(118, 22);
             this.button1.TabIndex = 15;
             this.button1.Text = "Добавить";
             this.button1.UseVisualStyleBackColor = true;
@@ -137,9 +150,10 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.dataGridView1);
-            this.panel1.Location = new System.Drawing.Point(12, 59);
+            this.panel1.Location = new System.Drawing.Point(6, 53);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(911, 640);
+            this.panel1.Size = new System.Drawing.Size(491, 275);
             this.panel1.TabIndex = 14;
             // 
             // dataGridView1
@@ -152,6 +166,7 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -159,21 +174,55 @@
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 41;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(911, 640);
+            this.dataGridView1.Size = new System.Drawing.Size(491, 275);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(415, 28);
+            this.button10.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(81, 22);
+            this.button10.TabIndex = 43;
+            this.button10.Text = "Очистить";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(331, 28);
+            this.button11.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(81, 22);
+            this.button11.TabIndex = 42;
+            this.button11.Text = "Поиск";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // searchTextBox
+            // 
+            this.searchTextBox.Location = new System.Drawing.Point(6, 28);
+            this.searchTextBox.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.Size = new System.Drawing.Size(321, 23);
+            this.searchTextBox.TabIndex = 41;
+            // 
             // Genres
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1161, 714);
+            this.ClientSize = new System.Drawing.Size(625, 335);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.button11);
+            this.Controls.Add(this.searchTextBox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.Name = "Genres";
             this.Text = "Библиотека";
             this.groupBox1.ResumeLayout(false);
@@ -198,5 +247,8 @@
         private Button button1;
         private Panel panel1;
         private DataGridView dataGridView1;
+        private Button button10;
+        private Button button11;
+        private TextBox searchTextBox;
     }
 }

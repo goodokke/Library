@@ -18,6 +18,7 @@ namespace Library
                 formBooks.SelectedCellPublisher = -1;
             }
             InitializeComponent();
+            CenterToScreen();
             getRecords();
         }
 
@@ -114,7 +115,7 @@ namespace Library
         {
             if (dataGridView1.RowCount != 0 && dataGridView1.SelectedRows.Count > 0)
             {
-                if (MessageBox.Show("Вы уверены, что хотите удалить запись?", "Удаление", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                if (MessageBox.Show("Вы уверены удалить запись?", "Удаление", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
                     using (DBContext DBContext = new DBContext())
                     {
@@ -127,7 +128,7 @@ namespace Library
                         }
                         else
                         {
-                            MessageBox.Show("Данная запись связана с другими записями.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Данная запись имеет связь с другими записями.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     getRecords();
@@ -158,7 +159,7 @@ namespace Library
 
         private void button5_Click_1(object sender, EventArgs e)
         {
-            var _publishers = publishers.FindAll(r => r.Name.ToString().ToLower().Contains(searchTextBox.Text) ||
+            var _publishers = publishers.FindAll(r => r.Name.ToString().ToLower().Contains(searchTextBox.Text.ToLower()) ||
                                                 r.Address.ToString().ToLower().Contains(searchTextBox.Text.ToLower()));
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = _publishers;

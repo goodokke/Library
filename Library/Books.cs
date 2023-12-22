@@ -22,6 +22,7 @@ namespace Library
         public int SelectedCellPublisher = -1;
         public Author SelectedAuthor;
         private Journals formJournals;
+        private List<Book> _books;
         public Books(Journals formJournals = null)
         {
             this.formJournals = formJournals;
@@ -30,6 +31,7 @@ namespace Library
                 formJournals.SelectedCellReader = -1;
             }
             InitializeComponent();
+            CenterToScreen();
             getGenres();
             getPublishers();
             getRecords();
@@ -44,10 +46,10 @@ namespace Library
         {
             using (DBContext DBContext = new DBContext())
             {
-                List<Book> books = DBContext.Books.Include(b => b.Genre).Include(b => b.Publisher).Include(b => b.Authors).ToList();
+                _books = DBContext.Books.Include(b => b.Genre).Include(b => b.Publisher).Include(b => b.Authors).ToList();
 
                 dataGridView1.DataSource = null;
-                var data = books
+                var data = _books
                     .Select(b => new
                     {
                         Id = b.Id,
@@ -302,6 +304,50 @@ namespace Library
                     index = dataGridView1.SelectedRows[0].Index;
                 }
             }
+        }
+
+        /// <summary>
+        /// Поиск книг
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button11_Click(object sender, EventArgs e)
+        {
+            var books = _books.FindAll(r => r.Name.ToString().ToLower().Contains(searchTextBox.Text.ToLower()) ||
+                                                    r.Publisher.Name.ToString().ToLower().Contains(searchTextBox.Text.ToLower()) ||
+                                                    r.YearPublish.ToString().ToLower().Contains(searchTextBox.Text.ToLower()) ||
+                                                    r.Genre.Name.ToLower().Contains(searchTextBox.Text.ToLower()) ||
+                                                    r.Authors.Any(x=>x.SecondName.ToLower().Contains(searchTextBox.Text.ToLower())));
+            dataGridView1.DataSource = null;
+            var data = books
+                    .Select(b => new
+                    {
+                        Id = b.Id,
+                        Name = b.Name,
+                        YearPublish = b.YearPublish,
+                        Genre = b.Genre.Name,
+                        Publisher = b.Publisher.Name,
+                        Authors = String.Join(", ", b.Authors.Select(a => a.SecondName + ' ' + a.FirstName[0] + ". " + a.ThirdName[0] + '.'))
+                    }).ToList();
+
+            dataGridView1.DataSource = data;
+            dataGridView1.Columns["Id"].Visible = false;
+            dataGridView1.Columns["Name"].HeaderText = "Наименование";
+            dataGridView1.Columns["YearPublish"].HeaderText = "Год издания";
+            dataGridView1.Columns["Genre"].HeaderText = "Жанр";
+            dataGridView1.Columns["Publisher"].HeaderText = "Издательство";
+            dataGridView1.Columns["Authors"].HeaderText = "Авторы";
+        }
+
+        /// <summary>
+        /// Очистить
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button10_Click(object sender, EventArgs e)
+        {
+            searchTextBox.Text = "";
+            getRecords();
         }
     }
 }

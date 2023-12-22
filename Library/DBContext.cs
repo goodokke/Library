@@ -29,7 +29,7 @@ namespace Library
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=\"C:\\Users\\ekado\\source\\repos\\Library\\Library\\library.db\"");
+            optionsBuilder.UseSqlite("Data Source=\"C:\\Users\\denis\\RiderProjects\\Library\\Library\\library.db\"");
         }
     }
 }
